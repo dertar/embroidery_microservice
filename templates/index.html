@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Embroidery Microservice</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ style }}">
+
+</head>
+
+<body>
+
+  <div class="container center centered">
+    <div class="row">
+      <div>
+
+        <form id="upload-file" class="was-validated" method="post" enctype="multipart/form-data">
+          <label class="custom-file">
+            <input type="file" id="file" name="file" class="custom-file-input" required>
+            <span class="custom-file-control"></span>
+          </label>
+
+          <small class="form-text text-muted">
+            info
+          </small>
+          <button id="upload-file-btn" type="button" class="btn btn-primary btn-lg btn-block">Отправить изображение</button>
+          </form>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Настройки</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form>
+
+        <div class="modal-body">
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="img-input-width">Ширина входного изображение</label>
+            <input type="text" class="form-control" id="img-input-width" disabled>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="img-input-height">Высота входного изображение&nbsp;</label>
+            <input type="text" class="form-control" id="img-input-height" disabled>
+          </div>
+        </div>
+
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="embroidery-width">Ширина вышивки</label>
+              <input type="text" class="form-control" id="embroidery-width" class="form-control" data-container="body" data-toggle="popover" data-placement="left" data-content="Здесь должно быть число, которое больше 0 и меньше размеров входного изображения. Высота вычесляется автоматически!">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="embroidery-height">Высота вышивки</label>
+              <input type="text" class="form-control" id="embroidery-height" disabled>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="output-img-width">Ширина выходного изображение</label>
+              <input type="text" class="form-control" id="output-img-width" class="form-control" data-container="body" data-toggle="popover" data-placement="left" data-content="Здесь должно быть число. Эти размеры необходимы для удобного чтения схемы на экране/печати. Высота вычесляется автоматически!">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="output-img-height">Высота выходного изображение</label>
+              <input type="text" class="form-control" id="output-img-height" disabled>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="input-colors">Количество цветов</label>
+              <input type="text" class="form-control" id="input-colors" class="form-control" data-container="body" data-toggle="popover" data-placement="left" data-content="Здесь должно быть число. Количество цветов которое будет на вышивке.">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="input-xy">XY оси</label>
+              <div class="row">
+              <div class="col-lg-12">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <input id="input-xy-bool" type="checkbox">
+                  </span>
+                  <input id="input-xy" type="text" class="form-control" data-container="body" data-toggle="popover" data-placement="right" data-content="Здесь должно быть число. Чертить ли оси XY, если да, то через сколько крестиков" disabled>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-row">
+          <div class="form-group col-md-6" id="help-symbols" data-toggle="tooltip" data-placement="left" title="Сгенирировать ли символы на вышивке, для удобного чтения">
+            <label class="form-check-label" >
+              <input id="input-symbols" class="form-check-input" type="checkbox" value="" >
+              Символы
+            </label>
+          </div>
+          <div class="form-group col-md-6" id="help-insert" data-toggle="tooltip" data-placement="right" title="Сгенирировать ли вкладыш с информации о цветах">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="input-insert" value="">
+              Вкладыш
+            </label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button id="button-options" type="button" class="btn btn-primary">Начать</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+  <script src="{{ validation_script }}"></script>
+</body>
+</html>
